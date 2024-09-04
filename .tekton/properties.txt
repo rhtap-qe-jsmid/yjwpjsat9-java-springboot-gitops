@@ -1,0 +1,34 @@
+# PE can replace these values with on-prem host
+export GITHUB__DEFAULT__HOST=github.com
+export GITLAB__DEFAULT__HOST=gitlab.com
+export QUAY__DEFAULT__HOST=quay.io
+
+# leave empty if you don't want to set defaults for your git or quay org 
+export GITHUB__DEFAULT__ORG=""
+export QUAY__DEFAULT__ORG=""
+
+# PE can replace these values with own pipeline fork
+export PIPELINE__REPO__URL=https://github.com/jsmid1/tssc-sample-pipelines
+export PIPELINE__REPO__BRANCH=RHTAPBUGS-1305-add-workspace
+
+export DEFAULT__DEPLOYMENT__NAMESPACE__PREFIX=rhtap-app
+
+export RHTAP__DEFAULT__NAMESPACE=rhtap
+export ARGOCD__DEFAULT__NAMESPACE=rhtap
+export ARGOCD__DEFAULT__INSTANCE=default
+export ARGOCD__DEFAULT__PROJECT=default
+
+
+# For secret reference in Repositroy CRs
+export GIT__SECRET__DEFAULT__NAME=gitlab-auth-secret
+export GIT__SECRET__DEFAULT__KEY=password
+export WEBHOOK__SECRET__DEFAULT__NAME=pipelines-secret
+export WEBHOOK__SECRET__DEFAULT__KEY=webhook.secret
+
+# compute the template tag to set defaults, leave empty if not set
+if [ ! -z "${GITHUB__DEFAULT__ORG}" ]; then
+export DEFAULT_ORG_FOR_GITHUB="default: $GITHUB__DEFAULT__ORG"
+fi
+if [ ! -z "${QUAY__DEFAULT__ORG}" ]; then
+export DEFAULT_ORG_FOR_QUAY="default: $QUAY__DEFAULT__ORG"
+fi
